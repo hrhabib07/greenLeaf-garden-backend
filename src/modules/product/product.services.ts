@@ -6,4 +6,4 @@ const createProductIntoDB = async (payload: TProduct) => {
   return result;
 };
 
-export const ProductServices = { createProductIntoDB };
+export const productServices = { createProductIntoDB };
