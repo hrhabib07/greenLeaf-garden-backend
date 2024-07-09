@@ -9,5 +9,9 @@ router.post(
   validateRequest(productValidation.createProductValidationSchema),
   productControllers.createProduct
 );
+router.get("/", productControllers.getAllProducts);
+router.get("/:id", productControllers.getASingleProduct);
+router.delete("/:id", productControllers.deleteProduct);
+router.put("/:id", productControllers.updateProduct);
 
 export const ProductRoutes = router;

@@ -7,6 +7,7 @@ export type TProduct = {
   image: string; // URL to the image
   brand: string;
   stock: number; // Available quantity in stock
-  createdAt: Date;
-  updatedAt: Date;
+  isDeleted?: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
 };

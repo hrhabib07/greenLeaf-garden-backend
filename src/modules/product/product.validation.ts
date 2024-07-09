@@ -11,9 +11,25 @@ const createProductValidationSchema = z.object({
     image: z.string().url(), // URL to the image
     brand: z.string().min(1),
     stock: z.number().min(0),
-    createdAt: z.date(),
-    updatedAt: z.date(),
+    isDeleted: z.boolean().optional(),
   }),
 });
 
-export const productValidation = { createProductValidationSchema };
+const updateProductValidationSchema = z.object({
+  body: z.object({
+    title: z.string().min(1).optional(),
+    price: z.number().min(0).optional(),
+    category: z.string().min(1).optional(),
+    description: z.string().min(1).optional(),
+    rating: z.number().min(0).max(5).optional(),
+    image: z.string().url().optional(), // URL to the image
+    brand: z.string().min(1).optional(),
+    stock: z.number().min(0).optional(),
+    isDeleted: z.boolean().optional(),
+  }),
+});
+
+export const productValidation = {
+  createProductValidationSchema,
+  updateProductValidationSchema,
+};

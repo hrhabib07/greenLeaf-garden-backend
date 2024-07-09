@@ -12,6 +12,7 @@ const productSchema = new Schema<TProduct>(
     image: { type: String, required: true },
     brand: { type: String, required: true },
     stock: { type: Number, required: true },
+    isDeleted: { type: Boolean, default: false },
   },
   {
     timestamps: true, // Automatically adds createdAt and updatedAt fields
