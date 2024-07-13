@@ -27,7 +27,7 @@ const deleteProductFromDB = async (id: string) => {
 const getALlProductsFromDB = async (query: Record<string, undefined>) => {
   // console.log("base query", query.category);
   const queryObj = { ...query };
-  const excludesField = ["searchTerm", "sort"];
+  const excludesField = ["searchTerm", "sort", "limit", "page"];
   excludesField.forEach((el) => delete queryObj[el]);
   // console.log(queryObj);
   let searchTerm = "";
@@ -46,13 +46,30 @@ const getALlProductsFromDB = async (query: Record<string, undefined>) => {
   });
   const filterQuery = searchQuery.find(queryObj);
 
-  let sort = "-cratedAt";
+  let sort = "-createdAt";
   if (query.sort) {
     sort = query.sort;
   }
+  const sortQuery = filterQuery.sort(sort);
 
-  const sortQuery = await filterQuery.sort(sort);
-  return sortQuery;
+  let page = 1;
+  let limit = 3;
+  let skip = 0;
+
+  if (query.limit) {
+    limit = Number(query.limit);
+  }
+  if (query.page) {
+    page = Number(query.page);
+    skip = (page - 1) * limit;
+  }
+  if (query.page || query.limit) {
+    const paginateQuery = sortQuery.skip(skip);
+    const limitQuery = await paginateQuery.limit(limit);
+    return limitQuery;
+  } else {
+    return await filterQuery.sort(sort);
+  }
 };
 const getASingleProductFromDB = async (id: string) => {
   const result = await Product.findOne({ _id: id, isDeleted: false });
