@@ -1,7 +1,7 @@
 export type TProduct = {
   title: string;
   price: number;
-  category: string;
+  category: "fruit" | "shade" | "flowers";
   description: string;
   rating: number;
   image: string; // URL to the image

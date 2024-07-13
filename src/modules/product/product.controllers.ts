@@ -40,7 +40,8 @@ const deleteProduct = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getAllProducts = catchAsync(async (req: Request, res: Response) => {
-  const result = await productServices.getALlProductsFromDB();
+  // console.log(req.query);
+  const result = await productServices.getALlProductsFromDB(req.query);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,

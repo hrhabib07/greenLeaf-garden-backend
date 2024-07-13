@@ -5,7 +5,7 @@ const createProductValidationSchema = z.object({
   body: z.object({
     title: z.string().min(1),
     price: z.number().min(0),
-    category: z.string().min(1),
+    category: z.enum(["fruit", "shade", "flowers"]),
     description: z.string().min(1),
     rating: z.number().min(0).max(5),
     image: z.string().url(), // URL to the image
@@ -19,7 +19,7 @@ const updateProductValidationSchema = z.object({
   body: z.object({
     title: z.string().min(1).optional(),
     price: z.number().min(0).optional(),
-    category: z.string().min(1).optional(),
+    category: z.enum(["fruit", "shade", "flowers"]).optional(),
     description: z.string().min(1).optional(),
     rating: z.number().min(0).max(5).optional(),
     image: z.string().url().optional(), // URL to the image
