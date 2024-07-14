@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { catchAsync } from "../../utils/catchAsync";
-import { TProduct } from "./product.interface";
+import { TProduct, TProductQuery } from "./product.interface";
 import { productServices } from "./product.services";
 import sendResponse from "../../utils/sendResponse";
 import httpStatus from "http-status";
@@ -40,8 +40,8 @@ const deleteProduct = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getAllProducts = catchAsync(async (req: Request, res: Response) => {
-  // console.log(req.query);
-  const result = await productServices.getALlProductsFromDB(req.query);
+  const query = req.query as unknown as TProductQuery;
+  const result = await productServices.getALlProductsFromDB(query);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,

@@ -11,3 +11,10 @@ export type TProduct = {
   createdAt?: Date;
   updatedAt?: Date;
 };
+
+export type TProductQuery = {
+  searchTerm?: string;
+  sort?: string;
+  limit?: string;
+  page?: string;
+};

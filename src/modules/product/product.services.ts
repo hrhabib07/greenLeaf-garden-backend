@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from "http-status";
 import AppError from "../../errors/AppError";
-import { TProduct } from "./product.interface";
+import { TProduct, TProductQuery } from "./product.interface";
 import Product from "./product.model";
 
 const createProductIntoDB = async (payload: TProduct) => {
@@ -24,9 +25,9 @@ const deleteProductFromDB = async (id: string) => {
   });
   return result;
 };
-const getALlProductsFromDB = async (query: Record<string, undefined>) => {
+const getALlProductsFromDB = async (query: TProductQuery) => {
   // console.log("base query", query.category);
-  const queryObj = { ...query };
+  const queryObj: Record<string, any> = { ...query };
   const excludesField = ["searchTerm", "sort", "limit", "page"];
   excludesField.forEach((el) => delete queryObj[el]);
   // console.log(queryObj);
