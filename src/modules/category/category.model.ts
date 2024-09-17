@@ -4,6 +4,7 @@ import { model, Schema } from "mongoose";
 const categorySchema = new Schema<TCategory>(
   {
     name: { type: String, required: true },
+    isDeleted: { type: Boolean, default: false },
   },
   {
     timestamps: true, // Automatically adds createdAt and updatedAt fields
