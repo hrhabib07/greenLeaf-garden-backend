@@ -19,4 +19,5 @@ export type TProductQuery = {
   sort?: string;
   limit?: string;
   page?: string;
+  category?: Types.ObjectId;
 };
