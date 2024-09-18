@@ -42,7 +42,7 @@ const getALlProductsFromDB = async (query: TProductQuery) => {
       { title: { $regex: searchTerm, $options: "i" } },
       { description: { $regex: searchTerm, $options: "i" } },
       { brand: { $regex: searchTerm, $options: "i" } },
-      { category: { $regex: searchTerm, $options: "i" } },
+      // { category: { $regex: searchTerm, $options: "i" } },
     ],
   });
   const filterQuery = searchQuery.find(queryObj);
@@ -66,14 +66,16 @@ const getALlProductsFromDB = async (query: TProductQuery) => {
   }
   if (query.page || query.limit) {
     const paginateQuery = sortQuery.skip(skip);
-    const limitQuery = await paginateQuery.limit(limit);
+    const limitQuery = await paginateQuery.limit(limit).populate("category");
     return limitQuery;
   } else {
-    return await filterQuery.sort(sort);
+    return await filterQuery.sort(sort).populate("category");
   }
 };
 const getASingleProductFromDB = async (id: string) => {
-  const result = await Product.findOne({ _id: id, isDeleted: false });
+  const result = await Product.findOne({ _id: id, isDeleted: false }).populate(
+    "category"
+  );
   return result;
 };
 

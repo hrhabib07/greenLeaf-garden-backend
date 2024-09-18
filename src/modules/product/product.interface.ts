@@ -1,7 +1,9 @@
+import { Types } from "mongoose";
+
 export type TProduct = {
   title: string;
   price: number;
-  category: "fruit" | "shade" | "flowers";
+  category: Types.ObjectId;
   description: string;
   rating: number;
   image: string; // URL to the image
