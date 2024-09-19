@@ -28,7 +28,7 @@ const deleteCategoryFromDB = async (id: string) => {
   return result;
 };
 const getALlCategoriesFromDB = async () => {
-  const result = await Category.find();
+  const result = await Category.find({ isDeleted: false });
   return result;
 };
 const getASingleCategoryFromDB = async (id: string) => {
